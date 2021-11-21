@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.IO;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using SoulsFormats;
 
 namespace BreakableObjectLoot
@@ -14,11 +10,6 @@ namespace BreakableObjectLoot
         
         static void Main(string[] args)
         {
-            IniFile file = new IniFile("RandomizerSettings.ini");
-            Console.WriteLine(file.Read("IncludeItems"));
-
-
-            return;
             string[] objectModelNames = { "o8411", "o8410", "o8403", "o8404", "o8402", "o8401", "o8400", "o7690", "o7650", "o7641", "o7640", "o7600", "o6357", "o6456", "o6455", "o6452", "o6451", "o6450", "o5990", "o5983", "o5982", "o5981", "o5980", "o5972", "o5971", "o5970", "o5969", "o5968", "o5967", "o5940", "o5930", "o5920", "o5552", "o5551", "o5550", "o4611", "o4401", "o4400", "o4370", "o4362", "o4411", "o4408", "o4407", "o4406", "o4361", "o4350", "o4215", "o3890", "o3654", "o3653", "o3652", "o3651", "o3650", "o3612", "o3611", "o3610", "o3501", "o3500", "o3312", "o3311", "o3310", "o3301", "o3300", "o2253", "o2252", "o2251", "o2203", "o2202", "o2200", "o1946", "o1945", "o1940", "o1497", "o1496", "o1495", "o1322", "o1321", "o1320", "o1251", "o1176", "o1173", "o1172", "o1170", "o1163", "o1162", "o1156", "o1155", "o1154", "o1153", "o1152", "o1150", "o1146", "o1145", "o1140", "o1136", "o1135", "o1134", "o1133", "o1132", "o1130", "o1129", "o1120", "o1058", "o1056", "o1055", "o1049", "o1002", "o0106" };
             string msbPath = "../map/MapStudio/";
             string consoleInput = "";
