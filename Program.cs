@@ -51,6 +51,50 @@ namespace BreakableObjectLoot
                 6901800, 6901810
             };
 
+            int[] defaultGoodsIncludedIDs = {
+    230, 240, 270, 271, 272, 274, 275, 280, 290, 291, 292, 293, 294, 296, 297, 310, 311, 312, 313, 330, 350, 370,
+    373, 374, 375, 376, 380, 381, 382, 383, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 500, 501, 700, 701,
+    702, 703, 704, 705, 706, 707, 708, 709, 710, 711, 1000, 1010, 1020, 1030, 1040, 1050, 1060, 1070, 1080, 1090,
+    1100, 1110, 1120, 1130
+};
+
+            int[] arrowsWeaponIncludedIDs = {
+    2000000, 2001000, 2002000, 2003000, 2004000, 2005000, 2006000, 2007000, 2008000, 2100000, 2101000,
+    2102000, 2103000, 2104000
+};
+
+            int[] magicGoodsIncludedIDs = {
+    3000, 3010, 3020, 3030, 3040, 3050, 3060, 3070, 3100, 3110, 3120, 3300, 3310, 3400, 3410, 3500, 3510, 3520,
+    3530, 3540, 3550, 3810, 3700, 3710, 3720, 3730, 3740, 4000, 4010, 4020, 4030, 4040, 4050, 4060, 4100, 4110,
+    4200, 4210, 4220, 4300, 4310, 4360, 4400, 4500, 4510, 4520, 4530, 5000, 5010, 5020, 5030, 5040, 5050, 5100,
+    5110, 5210, 5300, 5310, 5320, 5400, 5500, 5510, 5520, 5600, 5610, 5700, 5800, 5810, 5900, 5910
+ };
+
+            int[] standardWeaponIncludedIDs = {
+    100000, 101000, 102000, 103000, 104000, 200000, 201000, 202000, 203000, 204000, 205000, 206000, 207000,
+    208000, 209000, 210000, 211000, 212000, 300000, 301000, 302000, 303000, 304000, 306000, 307000, 309000,
+    310000, 311000, 314000, 350000, 351000, 352000, 354000, 355000, 400000, 401000, 402000, 403000, 405000,
+    406000, 450000, 451000, 453000, 500000, 501000, 502000, 503000, 600000, 601000, 602000, 603000, 604000,
+    700000, 701000, 702000, 703000, 704000, 705000, 750000, 751000, 752000, 753000, 800000, 801000, 802000,
+    803000, 804000, 809000, 810000, 811000, 812000, 850000, 851000, 852000, 854000, 855000, 856000, 901000,
+    902000, 903000, 904000, 1000000, 1001000, 1002000, 1003000, 1004000, 1050000, 1051000, 1052000, 1100000,
+    1101000, 1102000, 1103000, 1105000, 1106000, 1107000, 1150000, 1151000, 1200000, 1201000, 1202000,
+    1203000, 1204000, 1205000, 1250000, 1252000, 1253000, 1300000, 1301000, 1302000, 1303000, 1304000,
+    1305000, 1306000, 1307000, 1308000, 1330000, 1332000, 1360000, 1361000, 1362000, 1363000, 1365000,
+    1366000, 1367000, 1396000, 1400000, 1401000, 1402000, 1403000, 1404000, 1405000, 1406000, 1408000,
+    1409000, 1410000, 1411000, 1450000, 1451000, 1452000, 1453000, 1454000, 1455000, 1456000, 1457000,
+    1460000, 1462000, 1470000, 1471000, 1472000, 1473000, 1474000, 1475000, 1476000, 1477000, 1478000,
+    1500000, 1501000, 1502000, 1503000, 1505000, 1506000, 1507000, 1600000, 1601000, 9000000, 9001000,
+    9002000, 9003000, 9010000, 9011000, 9012000, 9014000, 9015000, 9016000, 9017000, 9018000, 9019000,
+    9020000, 9021000
+};
+
+            int[] armorIDsRange = { 10000, 703000 }; //inclusive
+
+            bool randomize = false, randomizeArmor = false;
+
+            List<ItemEntry> randomItemCategoriesAndIDs = new List<ItemEntry>();
+
             Console.WriteLine("Dark Souls: Breakable Object Loot Mod v2.0\n");
 
             #region Game Check
@@ -69,6 +113,73 @@ namespace BreakableObjectLoot
 
             #endregion
 
+            consoleInput = "";
+            string[] acceptedInputs = { "1", "2", "3", "4", "5" };
+            while (!acceptedInputs.Contains(consoleInput))
+            {
+                Console.WriteLine("Please type a number to select your installation preference:\n" +
+                    "[1] = Regular Install\n" +
+                    "[2] = Randomizer Install (items included)\n" +
+                    "[3] = Randomizer Install (items and weapons included)\n" +
+                    "[4] = Randomizer Install (items, weapons, and armor included\n" +
+                    "[5] = Exit\n");
+                Console.Write("Type a number to select your option then press ENTER: ");
+                consoleInput = Console.ReadLine();
+            }
+            if (consoleInput == "5") return;
+            
+
+
+            switch (consoleInput)
+            {
+                case "1":
+                    break;
+                case "2":
+                    randomize = true;
+                    foreach (int id in defaultGoodsIncludedIDs)
+                    {
+                        randomItemCategoriesAndIDs.Add(new ItemEntry(1073741824, id));
+                    }
+                    foreach (int id in arrowsWeaponIncludedIDs)
+                    {
+                        randomItemCategoriesAndIDs.Add(new ItemEntry(0, id));
+                    }
+                    break;
+                case "3":
+                    randomize = true;
+                    foreach (int id in defaultGoodsIncludedIDs)
+                    {
+                        randomItemCategoriesAndIDs.Add(new ItemEntry(1073741824, id));
+                    }
+                    foreach (int id in arrowsWeaponIncludedIDs)
+                    {
+                        randomItemCategoriesAndIDs.Add(new ItemEntry(0, id));
+                    }
+                    foreach (int id in standardWeaponIncludedIDs)
+                    {
+                        randomItemCategoriesAndIDs.Add(new ItemEntry(0, id));
+                    }
+                    break;
+                case "4":
+                    randomize = true;
+                    foreach (int id in defaultGoodsIncludedIDs)
+                    {
+                        randomItemCategoriesAndIDs.Add(new ItemEntry(1073741824, id));
+                    }
+                    foreach (int id in arrowsWeaponIncludedIDs)
+                    {
+                        randomItemCategoriesAndIDs.Add(new ItemEntry(0, id));
+                    }
+                    foreach (int id in standardWeaponIncludedIDs)
+                    {
+                        randomItemCategoriesAndIDs.Add(new ItemEntry(0, id));
+                    }
+                    randomizeArmor = true;
+                    break;
+                default:
+                    break;
+            }
+
             #region Compatibility Check and File Declaration
 
             PARAM defaultModParams = PARAM.Read("resources/ItemLotParam.param");
@@ -77,6 +188,7 @@ namespace BreakableObjectLoot
             BND3 gameParamBND = BND3.Read("../param/GameParam/GameParam.parambnd");
             PARAM gameItemParams = PARAM.Read(gameParamBND.Files.Find(n => n.Name.Contains("ItemLotParam.param")).Bytes);
             PARAM gamePCAttackParams = PARAM.Read(gameParamBND.Files.Find(n => n.Name.Contains("AtkParam_Pc.param")).Bytes);
+
             EMEVD defaultEventFile = EMEVD.Read("resources/eventfile.emevd");
             EMEVD gameEventFile = EMEVD.Read("../event/common.emevd");
 
@@ -106,7 +218,7 @@ namespace BreakableObjectLoot
                 while (consoleInput != "Y" && consoleInput != "y" && consoleInput != "N" && consoleInput != "n")
                 {
                     Console.Write("Type [Y] to continue, [N] to exit: ");
-                    consoleInput = Console.ReadLine().Trim();
+                    consoleInput = Console.ReadLine();
                 }
                 if (consoleInput == "N" || consoleInput == "n")
                 {
@@ -118,11 +230,49 @@ namespace BreakableObjectLoot
 
             #region Param Installation
 
+            if (randomizeArmor)
+            {
+                PARAM gameArmorParams = PARAM.Read(gameParamBND.Files.Find(n => n.Name.Contains("EquipParamProtector.param")).Bytes);
+                List<int> armorIDs = new List<int>();
+                int currentArmorIndex = armorIDsRange[0];
+                while (currentArmorIndex >= armorIDsRange[0] && currentArmorIndex <= armorIDsRange[1])
+                {
+                    if (gameArmorParams.Rows.Exists(r => r.ID == currentArmorIndex))
+                    {
+                        armorIDs.Add(currentArmorIndex);
+                    }
+                    currentArmorIndex += 1000;
+                }
+                foreach (int id in armorIDs)
+                {
+                    randomItemCategoriesAndIDs.Add(new ItemEntry(268435456, id));
+                }
+            }
+
+            Random rn = new Random();
             //apply itemlotparams
             for (int i = 0; i < itemLotIDs.Length; i++)
             {
                 int checkRow = gameItemParams.Rows.FindIndex(r => r.ID == itemLotIDs[i]);
                 PARAM.Row currentRow = defaultModParams.Rows.Find(r => r.ID == itemLotIDs[i]);
+                if (randomize)
+                {
+                    
+                    List<ItemEntry> closedSet = new List<ItemEntry>();
+                    for (int j = 0; j < 6; j++)
+                    {
+                        
+                        ItemEntry currentItemEntry = randomItemCategoriesAndIDs[rn.Next(0, randomItemCategoriesAndIDs.Count)];
+                        while (closedSet.Contains(currentItemEntry))
+                        {
+                            currentItemEntry = randomItemCategoriesAndIDs[rn.Next(0, randomItemCategoriesAndIDs.Count)];
+                        }
+                        currentRow.Cells[0 + j].Value = currentItemEntry.itemID;
+                        currentRow.Cells[8 + j].Value = currentItemEntry.category;
+                        currentRow.Cells[44 + j].Value = 1;
+
+                    }
+                }
                 if (checkRow != -1)
                 {
                     gameItemParams.Rows[checkRow] = currentRow;
@@ -193,5 +343,16 @@ namespace BreakableObjectLoot
 
 
 
+    }
+    
+    class ItemEntry
+    {
+        public int category;
+        public int itemID;
+        public ItemEntry(int _category, int _itemID)
+        {
+            category = _category;
+            itemID = _itemID;
+        }
     }
 }
