@@ -101,7 +101,7 @@ namespace BreakableObjectLoot
 
             try
             {
-                EMEVD fileCheck = EMEVD.Read("../event/common.emevd");
+                EMEVD fileCheck = EMEVD.Read("../event/common.emevd.dcx");
             }
             catch
             {
@@ -183,14 +183,14 @@ namespace BreakableObjectLoot
             #region Compatibility Check and File Declaration
 
             PARAM defaultModParams = PARAM.Read("resources/ItemLotParam.param");
-            PARAMDEF itemParamDefs = PARAMDEF.Read(BND3.Read("../paramdef/paramdef.paramdefbnd").Files.Find(n => n.Name.Contains("ItemLotParam.paramdef")).Bytes);
-            PARAMDEF pcAttackParamDefs = PARAMDEF.Read(BND3.Read("../paramdef/paramdef.paramdefbnd").Files.Find(n => n.Name.Contains("AtkParam.paramdef")).Bytes);
-            BND3 gameParamBND = BND3.Read("../param/GameParam/GameParam.parambnd");
+            PARAMDEF itemParamDefs = PARAMDEF.Read(BND3.Read("../paramdef/paramdef.paramdefbnd.dcx").Files.Find(n => n.Name.Contains("ItemLotParam.paramdef")).Bytes);
+            PARAMDEF pcAttackParamDefs = PARAMDEF.Read(BND3.Read("../paramdef/paramdef.paramdefbnd.dcx").Files.Find(n => n.Name.Contains("AtkParam.paramdef")).Bytes);
+            BND3 gameParamBND = BND3.Read("../param/GameParam/GameParam.parambnd.dcx");
             PARAM gameItemParams = PARAM.Read(gameParamBND.Files.Find(n => n.Name.Contains("ItemLotParam.param")).Bytes);
             PARAM gamePCAttackParams = PARAM.Read(gameParamBND.Files.Find(n => n.Name.Contains("AtkParam_Pc.param")).Bytes);
 
             EMEVD defaultEventFile = EMEVD.Read("resources/eventfile.emevd");
-            EMEVD gameEventFile = EMEVD.Read("../event/common.emevd");
+            EMEVD gameEventFile = EMEVD.Read("../event/common.emevd.dcx");
 
             defaultModParams.ApplyParamdef(itemParamDefs);
             gameItemParams.ApplyParamdef(itemParamDefs);
@@ -287,7 +287,7 @@ namespace BreakableObjectLoot
 
             gameParamBND.Files.Find(n => n.Name.Contains("ItemLotParam.param")).Bytes = gameItemParams.Write();
             gameParamBND.Files.Find(n => n.Name.Contains("AtkParam_Pc.param")).Bytes = gamePCAttackParams.Write();
-            gameParamBND.Write("../param/GameParam/GameParam.parambnd");
+            gameParamBND.Write("../param/GameParam/GameParam.parambnd.dcx", DCX.Type.DCX_DFLT_10000_24_9);
             Console.WriteLine("Item Params installed...");
 
             #endregion
@@ -311,7 +311,7 @@ namespace BreakableObjectLoot
                 gameEventFile.Events[0].Instructions.Add(currentInitInstruction);
             }
 
-            gameEventFile.Write("../event/common.emevd", DCX.Type.None);
+            gameEventFile.Write("../event/common.emevd.dcx", DCX.Type.DCX_DFLT_10000_24_9);
             Console.WriteLine("Events Written...");
 
             #endregion
@@ -332,7 +332,7 @@ namespace BreakableObjectLoot
                     }
 
                 }
-                currentMSB.Write(msbPath + key, DCX.Type.None);
+                currentMSB.Write(msbPath + key);
             }
             Console.WriteLine("MSB modified...");
             #endregion
